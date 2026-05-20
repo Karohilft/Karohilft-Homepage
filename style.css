@@ -260,7 +260,7 @@ section { position: relative; }
 .nav-logo:hover { opacity: 0.85; }
 
 .nav-logo-img {
-  height: 44px;
+  height: 58px;
   width: auto;
   display: block;
   object-fit: contain;
@@ -302,6 +302,10 @@ section { position: relative; }
   font-weight: 500 !important;
   box-shadow: 0 4px 18px var(--rose-glow);
   transition: var(--t) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
 }
 .nav-cta::after { display: none !important; }
 .nav-cta:hover {
@@ -1254,7 +1258,7 @@ section { position: relative; }
 }
 
 .footer-logo-img {
-  height: 48px;
+  height: 62px;
   width: auto;
   object-fit: contain;
   /* invert logo to white on dark background */
