@@ -1562,6 +1562,34 @@ section { position: relative; }
   line-height: 1.85;
 }
 
+.team-values {
+  border-left: 3px solid var(--rose-light);
+  padding-left: 1.4rem;
+  margin: 1.6rem 0;
+}
+.team-values p { margin-bottom: 1rem; }
+.team-values p:last-child { margin-bottom: 0; }
+
+.team-funding {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  background: var(--rose-pale);
+  border-radius: var(--r-sm);
+  padding: 1.1rem 1.3rem;
+  margin: 1.6rem 0;
+}
+.team-funding svg { flex-shrink: 0; margin-top: 3px; color: var(--rose); }
+.team-funding p { font-size: 0.93rem !important; color: var(--mid); margin: 0 !important; }
+
+.team-closing {
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--dark) !important;
+  line-height: 1.7;
+  margin: 1.4rem 0 !important;
+}
+
 .team-signature {
   margin-top: 2rem;
   font-family: var(--font-display);
