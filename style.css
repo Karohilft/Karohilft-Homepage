@@ -833,14 +833,24 @@ section { position: relative; }
   background: rgba(255,255,255,0.10) !important;
   transform: translateY(-4px);
 }
+.eq-icon {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: var(--rose-light);
+}
 .eq p {
   font-family: var(--font-display);
   font-size: 1.08rem;
-  font-style: italic;
+  font-style: normal;
   font-weight: 300;
   color: rgba(255,255,255,0.88);
   line-height: 1.75;
-  margin-bottom: 1.2rem;
+  margin-bottom: 0.6rem;
+}
+.eq p strong {
+  font-weight: 500;
+  font-style: italic;
+  color: rgba(255,255,255,0.98);
 }
 .eq cite {
   font-size: 0.8rem;
