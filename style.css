@@ -339,14 +339,26 @@ section { position: relative; }
 ════════════════════════════════════════════ */
 .hero {
   min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  column-gap: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 120px 0 0;
   overflow: hidden;
   background: var(--cream);
   position: relative;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  column-gap: 3rem;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 4rem);
+  position: relative;
+  z-index: 1;
 }
 
 .hero-bg {
@@ -357,7 +369,7 @@ section { position: relative; }
 }
 
 .hero-left {
-  padding: 0 0 6rem clamp(1.5rem, 5vw, 4rem);
+  padding: 0 0 6rem 0;
   max-width: 660px;
   position: relative;
   z-index: 1;
@@ -1448,13 +1460,15 @@ section { position: relative; }
 
 @media (max-width: 900px) {
   .hero {
-    grid-template-columns: 1fr;
     min-height: auto;
     padding-top: 110px;
     padding-bottom: 3rem;
   }
+  .hero-inner {
+    grid-template-columns: 1fr;
+  }
   .hero-left {
-    padding: 0 clamp(1.5rem, 5vw, 4rem) 2rem;
+    padding: 0 0 2rem;
     max-width: none;
     text-align: center;
   }
