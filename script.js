@@ -260,6 +260,31 @@
   }
 
 
+  /* ── SERVICE CARD EXPAND ── */
+  document.querySelectorAll('.service-expand-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card   = btn.closest('.service-card');
+      const detail = card.querySelector('.service-detail');
+      const open   = btn.getAttribute('aria-expanded') === 'true';
+
+      btn.setAttribute('aria-expanded', String(!open));
+      detail.classList.toggle('open', !open);
+      btn.firstChild.textContent = open ? 'Mehr erfahren' : 'Weniger ';
+    });
+  });
+
+
+  /* ── MOBILE LEISTUNGEN SUB-MENU ── */
+  document.querySelectorAll('.mobile-sub-toggle').forEach(toggle => {
+    toggle.addEventListener('click', () => {
+      const sub  = toggle.nextElementSibling;
+      const open = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!open));
+      sub.hidden = open;
+    });
+  });
+
+
   /* ── ACTIVE NAV LINK ON SCROLL ── */
   const sections = document.querySelectorAll('section[id]');
   const navLinks  = document.querySelectorAll('.nav-links a');

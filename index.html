@@ -24,7 +24,18 @@
     </a>
 
     <ul class="nav-links" role="list">
-      <li><a href="#leistungen">Leistungen</a></li>
+      <li class="nav-has-dropdown">
+        <a href="#leistungen" class="nav-dropdown-trigger">
+          Leistungen
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="nav-chevron" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </a>
+        <ul class="nav-dropdown-menu glass" role="list">
+          <li><a href="#alltagshilfe">Alltagshilfe</a></li>
+          <li><a href="#stundenbetreuung">Stundenbetreuung</a></li>
+          <li><a href="#24h-betreuung">24h-Betreuung</a></li>
+          <li><a href="#angehoerigenberatung">Angehörigenberatung</a></li>
+        </ul>
+      </li>
       <li><a href="#team">Über uns</a></li>
       <li><a href="#ablauf">Ablauf</a></li>
       <li><a href="#spenden">Spenden</a></li>
@@ -163,44 +174,104 @@
 
     <div class="services-grid">
 
-      <article class="service-card glass reveal">
+      <article class="service-card glass reveal" id="alltagshilfe">
         <div class="service-num">01</div>
         <div class="service-icon icon-rose" aria-hidden="true">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         </div>
         <h3>Alltagshilfe</h3>
         <p>Einkaufen, Kochen, Haushalt — kleine Dinge, die den großen Unterschied machen. Wir erledigen den Alltag, damit Sie Zeit für das Wesentliche haben.</p>
-        <span class="service-badge">Flexibel buchbar</span>
+        <div class="service-detail">
+          <ul class="service-detail-list">
+            <li>Einkaufen &amp; Besorgungen</li>
+            <li>Kochen &amp; Mahlzeiten vorbereiten</li>
+            <li>Haushalt &amp; Reinigung</li>
+            <li>Begleitung zu Terminen &amp; Spaziergängen</li>
+          </ul>
+          <p class="service-detail-note">Flexibel buchbar — kein Mindestvertrag, kein bürokratischer Aufwand.</p>
+        </div>
+        <div class="service-card-footer">
+          <span class="service-badge">Flexibel buchbar</span>
+          <button class="service-expand-btn" aria-expanded="false">
+            Mehr erfahren
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+        </div>
       </article>
 
-      <article class="service-card glass reveal">
+      <article class="service-card glass reveal" id="stundenbetreuung">
         <div class="service-num">02</div>
         <div class="service-icon icon-sage" aria-hidden="true">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
         <h3>Stundenbetreuung</h3>
         <p>Betreuung nach Ihrem Zeitplan — ob zwei Stunden täglich oder einmal die Woche. Qualifizierte Betreuer:innen kommen direkt zu Ihnen nach Hause.</p>
-        <span class="service-badge service-badge--sage">Ab 1 Stunde</span>
+        <div class="service-detail">
+          <ul class="service-detail-list">
+            <li>Unterstützung bei Körperpflege &amp; Mobilität</li>
+            <li>Gesellschaft &amp; Gesprächspartner</li>
+            <li>Gedächtnistraining &amp; Aktivierung</li>
+            <li>Medikamentenerinnerung</li>
+          </ul>
+          <p class="service-detail-note">Ab €&thinsp;35/Stunde · Pflegegeld kann eingesetzt werden.</p>
+        </div>
+        <div class="service-card-footer">
+          <span class="service-badge service-badge--sage">Ab 1 Stunde</span>
+          <button class="service-expand-btn" aria-expanded="false">
+            Mehr erfahren
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+        </div>
       </article>
 
-      <article class="service-card glass reveal">
+      <article class="service-card glass reveal" id="24h-betreuung">
         <div class="service-num">03</div>
         <div class="service-icon icon-sage" aria-hidden="true">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <h3>24h-Betreuung</h3>
         <p>Rund um die Uhr da — für Menschen, die intensive Unterstützung brauchen. Kompetente Betreuer:innen, die Tag und Nacht für Sicherheit und Wärme sorgen.</p>
-        <span class="service-badge">Vollzeit-Betreuung</span>
+        <div class="service-detail">
+          <ul class="service-detail-list">
+            <li>Betreuungsperson lebt im Haushalt</li>
+            <li>Rund um die Uhr erreichbar</li>
+            <li>2 Betreuer:innen im regelmäßigen Wechsel</li>
+            <li>Ideal bei Demenz oder nach Krankenhausaufenthalt</li>
+          </ul>
+          <p class="service-detail-note">Staatliche Förderung möglich — wir informieren Sie kostenlos.</p>
+        </div>
+        <div class="service-card-footer">
+          <span class="service-badge">Vollzeit-Betreuung</span>
+          <button class="service-expand-btn" aria-expanded="false">
+            Mehr erfahren
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+        </div>
       </article>
 
-      <article class="service-card glass reveal">
+      <article class="service-card glass reveal" id="angehoerigenberatung">
         <div class="service-num">04</div>
         <div class="service-icon icon-rose" aria-hidden="true">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
         </div>
         <h3>Angehörigenberatung</h3>
         <p>Nicht sicher, was Ihre Familie braucht? Wir beraten Sie ehrlich und einfühlsam — damit Sie die richtige Entscheidung für Ihre Liebsten treffen können.</p>
-        <span class="service-badge">Kostenlos &amp; unverbindlich</span>
+        <div class="service-detail">
+          <ul class="service-detail-list">
+            <li>Richtigen Betreuungsumfang ermitteln</li>
+            <li>Förderungen &amp; Zuschüsse erklären</li>
+            <li>Alle offenen Fragen beantworten</li>
+            <li>Telefonisch, per Mail oder vor Ort</li>
+          </ul>
+          <p class="service-detail-note">Kostenlos &amp; unverbindlich — ohne Verkaufsdruck.</p>
+        </div>
+        <div class="service-card-footer">
+          <span class="service-badge">Kostenlos &amp; unverbindlich</span>
+          <button class="service-expand-btn" aria-expanded="false">
+            Mehr erfahren
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+        </div>
       </article>
 
     </div>
@@ -671,7 +742,18 @@
 <nav class="mobile-nav" id="mobileNav" aria-label="Mobile Navigation" aria-hidden="true">
   <button class="mobile-nav-close" id="mobileClose" aria-label="Menü schließen">✕</button>
   <ul role="list">
-    <li><a href="#leistungen">Leistungen</a></li>
+    <li class="mobile-has-sub">
+      <button class="mobile-sub-toggle" aria-expanded="false">
+        Leistungen
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <ul class="mobile-sub-menu" role="list" hidden>
+        <li><a href="#alltagshilfe">Alltagshilfe</a></li>
+        <li><a href="#stundenbetreuung">Stundenbetreuung</a></li>
+        <li><a href="#24h-betreuung">24h-Betreuung</a></li>
+        <li><a href="#angehoerigenberatung">Angehörigenberatung</a></li>
+      </ul>
+    </li>
     <li><a href="#team">Über uns</a></li>
     <li><a href="#ablauf">Ablauf</a></li>
     <li><a href="#spenden">Spenden</a></li>
