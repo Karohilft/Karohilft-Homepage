@@ -1790,6 +1790,18 @@ section { position: relative; }
   font-weight: 500;
 }
 .vform-success svg { color: var(--sage); flex-shrink: 0; }
+.vform-error {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 1rem 1.2rem;
+  background: #fff0f0;
+  border-radius: var(--r-sm);
+  font-size: 0.88rem;
+  color: #c0392b;
+}
+.vform-error a { color: #c0392b; font-weight: 600; }
+.vform-error svg { flex-shrink: 0; }
 
 /* ── NAV MITHELFEN ── */
 .nav-mithelfen {

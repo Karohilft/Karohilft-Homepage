@@ -263,6 +263,7 @@
   /* ── VOLUNTEER FORM ── */
   const vForm    = document.getElementById('volunteerForm');
   const vSuccess = document.getElementById('volunteerSuccess');
+  const vError   = document.getElementById('volunteerError');
   if (vForm) {
     vForm.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -273,12 +274,13 @@
       try {
         const res = await fetch(vForm.action, { method: 'POST', body: new FormData(vForm), headers: { Accept: 'application/json' } });
         if (res.ok) {
-          vForm.querySelectorAll('input,select,textarea,button').forEach(el => el.hidden = true);
+          vForm.querySelectorAll('.vform-row, .vform-field, .vform-submit').forEach(el => { el.style.display = 'none'; });
           vSuccess.hidden = false;
         } else { throw new Error(); }
       } catch {
-        window.location.href = 'mailto:office@karohilft.at?subject=Mithelfen%20–%20Bewerbung';
-        btn.innerHTML = orig; btn.disabled = false;
+        btn.innerHTML = orig;
+        btn.disabled = false;
+        vError.hidden = false;
       }
     });
   }
