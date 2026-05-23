@@ -560,6 +560,9 @@ section { position: relative; }
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
 }
+.services-grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
 
 .service-card {
   border-radius: var(--r-xl);
@@ -1568,6 +1571,7 @@ section { position: relative; }
    RESPONSIVE
 ════════════════════════════════════════════ */
 @media (max-width: 1024px) {
+  .services-grid--3 { grid-template-columns: 1fr; }
   .trust-grid   { grid-template-columns: repeat(2, 1fr); }
   .process-track {
     grid-template-columns: 1fr;
