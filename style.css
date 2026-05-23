@@ -1526,41 +1526,28 @@ section { position: relative; }
   .emotional-headline { font-size: clamp(3rem, 13vw, 6rem); }
 }
 
-/* ── SERVICE FEATURED (24h) ── */
-.service-card--featured {
-  border: 2px solid var(--rose-light) !important;
-  position: relative;
-}
-.service-card--featured::before {
-  content: '★ Empfohlen';
-  position: absolute;
-  top: -1px;
-  right: 1.4rem;
-  background: linear-gradient(135deg, var(--rose), var(--rose-dark));
-  color: white;
-  font-size: 0.72rem;
+/* ── PAYPAL BUTTON ── */
+.btn-paypal {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.85rem 2rem;
+  background: #0070BA;
+  color: #fff;
+  border-radius: var(--r-pill);
+  font-family: var(--font-body);
+  font-size: 1rem;
   font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding: 4px 12px;
-  border-radius: 0 0 var(--r-sm) var(--r-sm);
+  text-decoration: none;
+  transition: background var(--t-fast), box-shadow var(--t-fast), transform var(--t-fast);
+  box-shadow: 0 6px 24px rgba(0, 112, 186, 0.30);
 }
-.service-badge--rose {
-  background: var(--rose-pale);
-  color: var(--rose-dark);
+.btn-paypal:hover {
+  background: #005EA6;
+  box-shadow: 0 10px 32px rgba(0, 112, 186, 0.40);
+  transform: translateY(-2px);
 }
-
-/* ── DONATE HINT ── */
-.donate-hint {
-  display: flex;
-  gap: 0.9rem;
-  align-items: flex-start;
-  margin-top: 1.2rem;
-  padding: 1.1rem 1.3rem;
-  border-radius: var(--r-sm);
-}
-.donate-hint svg { flex-shrink: 0; margin-top: 3px; color: var(--rose); }
-.donate-hint p { font-size: 0.9rem; color: var(--mid); margin: 0; line-height: 1.65; }
+.btn-paypal svg { flex-shrink: 0; }
 
 /* ── TEAM / WER SIND WIR ── */
 .team {
