@@ -27,6 +27,7 @@
       <li><a href="#team">Über uns</a></li>
       <li><a href="#stundenbetreuung">Stundenbetreuung</a></li>
       <li><a href="#24h-betreuung">24h-Betreuung</a></li>
+      <li><a href="#mithelfen" class="nav-mithelfen">Mithelfen</a></li>
       <li><a href="#spenden">Spenden</a></li>
       <li><a href="#kontakt" class="nav-cta">Kontakt aufnehmen</a></li>
     </ul>
@@ -521,6 +522,91 @@
 
 
 <!-- ════════════════════════════════════════
+     MITHELFEN
+════════════════════════════════════════ -->
+<section class="volunteer" id="mithelfen">
+  <div class="container">
+    <div class="volunteer-inner">
+
+      <div class="volunteer-text reveal">
+        <span class="section-tag">Werden Sie Teil des Teams</span>
+        <h2 class="section-title">Mit Herz<br /><em>mithelfen.</em></h2>
+        <p>Sie sind Betreuer:in, Pflegefachkraft, Psycholog:in — oder einfach jemand, der anpacken möchte? Wir freuen uns über jede Bewerbung. Schreiben Sie uns kurz, wer Sie sind und was Sie mitbringen.</p>
+        <ul class="volunteer-list">
+          <li>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Betreuer:innen &amp; Pflegefachkräfte
+          </li>
+          <li>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Psycholog:innen &amp; Therapeut:innen
+          </li>
+          <li>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Ehrenamtliche Helfer:innen
+          </li>
+        </ul>
+      </div>
+
+      <div class="volunteer-form-wrap reveal">
+        <form class="volunteer-form glass" id="volunteerForm"
+              action="https://formspree.io/f/IHRE_FORM_ID"
+              method="POST">
+          <input type="hidden" name="_subject" value="Mithelfen – Bewerbung von der Website" />
+
+          <div class="vform-row">
+            <div class="vform-field">
+              <label for="vName">Name</label>
+              <input type="text" id="vName" name="name" placeholder="Ihr Name" required />
+            </div>
+            <div class="vform-field">
+              <label for="vRole">Ich bin …</label>
+              <select id="vRole" name="rolle" required>
+                <option value="" disabled selected>Bitte wählen</option>
+                <option>Betreuer:in / Pflegehilfe</option>
+                <option>Diplomierte Pflegefachkraft</option>
+                <option>Psycholog:in / Therapeut:in</option>
+                <option>Krankenpfleger:in</option>
+                <option>Ehrenamtliche Helfer:in</option>
+                <option>Sonstiges</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="vform-row">
+            <div class="vform-field">
+              <label for="vEmail">E-Mail</label>
+              <input type="email" id="vEmail" name="email" placeholder="ihre@email.at" required />
+            </div>
+            <div class="vform-field">
+              <label for="vPhone">Telefon</label>
+              <input type="tel" id="vPhone" name="telefon" placeholder="+43 …" />
+            </div>
+          </div>
+
+          <div class="vform-field">
+            <label for="vMsg">Kurze Nachricht <span style="font-weight:400;opacity:0.6;">(optional)</span></label>
+            <textarea id="vMsg" name="nachricht" rows="3" placeholder="Was bringen Sie mit? Wann sind Sie verfügbar?"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary vform-submit">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Bewerbung senden
+          </button>
+
+          <div class="vform-success" id="volunteerSuccess" hidden>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Danke! Wir melden uns bald bei Ihnen.
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
      SPENDEN
 ════════════════════════════════════════ -->
 <section class="donate" id="spenden">
@@ -766,6 +852,7 @@
     <li><a href="#team">Über uns</a></li>
     <li><a href="#stundenbetreuung">Stundenbetreuung</a></li>
     <li><a href="#24h-betreuung">24h-Betreuung</a></li>
+    <li><a href="#mithelfen">Mithelfen</a></li>
     <li><a href="#spenden">Spenden</a></li>
     <li><a href="#kontakt">Kontakt</a></li>
   </ul>

@@ -1702,6 +1702,107 @@ section { position: relative; }
   margin: 0;
 }
 
+/* ════════════════════════════════════════════
+   MITHELFEN
+════════════════════════════════════════════ */
+.volunteer {
+  padding: 7rem 0;
+  background: var(--cream);
+}
+.volunteer-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 4rem;
+  align-items: start;
+}
+.volunteer-list {
+  list-style: none;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.volunteer-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.93rem;
+  color: var(--mid);
+}
+.volunteer-list svg { color: var(--sage); flex-shrink: 0; }
+
+/* ── VOLUNTEER FORM ── */
+.volunteer-form {
+  border-radius: var(--r-lg);
+  padding: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.vform-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.vform-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.vform-field label {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--mid);
+  letter-spacing: 0.02em;
+}
+.vform-field input,
+.vform-field select,
+.vform-field textarea {
+  padding: 0.75rem 1rem;
+  border: 1.5px solid var(--cream-alt);
+  border-radius: var(--r-sm);
+  background: rgba(255,255,255,0.7);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--dark);
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+  outline: none;
+  width: 100%;
+}
+.vform-field select { cursor: pointer; }
+.vform-field textarea { resize: vertical; min-height: 90px; }
+.vform-field input:focus,
+.vform-field select:focus,
+.vform-field textarea:focus {
+  border-color: var(--sage);
+  box-shadow: 0 0 0 3px rgba(122, 158, 142, 0.15);
+}
+.vform-submit { width: 100%; justify-content: center; margin-top: 0.4rem; }
+.vform-success {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 1rem 1.2rem;
+  background: var(--sage-pale);
+  border-radius: var(--r-sm);
+  font-size: 0.93rem;
+  color: var(--sage-dark);
+  font-weight: 500;
+}
+.vform-success svg { color: var(--sage); flex-shrink: 0; }
+
+/* ── NAV MITHELFEN ── */
+.nav-mithelfen {
+  color: var(--sage-dark) !important;
+  font-weight: 500 !important;
+}
+.nav-mithelfen::after { background: var(--sage) !important; }
+
+@media (max-width: 860px) {
+  .volunteer-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .vform-row { grid-template-columns: 1fr; }
+}
+
 /* ── PAYPAL BUTTON ── */
 .btn-paypal {
   display: inline-flex;

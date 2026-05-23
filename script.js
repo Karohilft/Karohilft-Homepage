@@ -260,6 +260,30 @@
   }
 
 
+  /* ── VOLUNTEER FORM ── */
+  const vForm    = document.getElementById('volunteerForm');
+  const vSuccess = document.getElementById('volunteerSuccess');
+  if (vForm) {
+    vForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = vForm.querySelector('.vform-submit');
+      const orig = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '… wird gesendet';
+      try {
+        const res = await fetch(vForm.action, { method: 'POST', body: new FormData(vForm), headers: { Accept: 'application/json' } });
+        if (res.ok) {
+          vForm.querySelectorAll('input,select,textarea,button').forEach(el => el.hidden = true);
+          vSuccess.hidden = false;
+        } else { throw new Error(); }
+      } catch {
+        window.location.href = 'mailto:office@karohilft.at?subject=Mithelfen%20–%20Bewerbung';
+        btn.innerHTML = orig; btn.disabled = false;
+      }
+    });
+  }
+
+
   /* ── FAQ ACCORDION ── */
   document.querySelectorAll('.faq-q').forEach(btn => {
     btn.addEventListener('click', () => {
