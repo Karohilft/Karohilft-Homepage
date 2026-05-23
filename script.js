@@ -242,7 +242,7 @@
         });
 
         if (res.ok) {
-          form.hidden = true;
+          form.style.display = 'none';
           formSuccess.hidden = false;
           formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
         } else {
@@ -274,7 +274,7 @@
       try {
         const res = await fetch(vForm.action, { method: 'POST', body: new FormData(vForm), headers: { Accept: 'application/json' } });
         if (res.ok) {
-          vForm.querySelectorAll('.vform-row, .vform-field, .vform-submit').forEach(el => { el.style.display = 'none'; });
+          vForm.style.display = 'none';
           vSuccess.hidden = false;
         } else { throw new Error(); }
       } catch {
