@@ -1640,6 +1640,68 @@ section { position: relative; }
   .emotional-headline { font-size: clamp(3rem, 13vw, 6rem); }
 }
 
+/* ════════════════════════════════════════════
+   FAQ
+════════════════════════════════════════════ */
+.faq { padding: 7rem 0; background: var(--cream-alt); }
+
+.faq-list {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.faq-item {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.35rem 1.6rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--dark);
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color var(--t-fast);
+}
+.faq-q svg { flex-shrink: 0; transition: transform 0.25s ease; color: var(--rose); }
+.faq-q[aria-expanded="true"] { color: var(--rose); }
+.faq-q[aria-expanded="true"] svg { transform: rotate(180deg); }
+.faq-q:hover { color: var(--rose); }
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.3s ease;
+  padding: 0 1.6rem;
+}
+.faq-a.open {
+  max-height: 200px;
+  padding: 0 1.6rem 1.3rem;
+}
+.faq-a p {
+  font-size: 0.93rem;
+  line-height: 1.8;
+  color: var(--mid);
+  border-top: 1px solid var(--cream-alt);
+  padding-top: 1rem;
+  margin: 0;
+}
+
 /* ── PAYPAL BUTTON ── */
 .btn-paypal {
   display: inline-flex;

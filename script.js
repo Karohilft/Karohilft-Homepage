@@ -260,6 +260,24 @@
   }
 
 
+  /* ── FAQ ACCORDION ── */
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling;
+      const open   = btn.getAttribute('aria-expanded') === 'true';
+      // close all others
+      document.querySelectorAll('.faq-q[aria-expanded="true"]').forEach(other => {
+        if (other !== btn) {
+          other.setAttribute('aria-expanded', 'false');
+          other.nextElementSibling.classList.remove('open');
+        }
+      });
+      btn.setAttribute('aria-expanded', String(!open));
+      answer.classList.toggle('open', !open);
+    });
+  });
+
+
   /* ── SERVICE CARD EXPAND ── */
   document.querySelectorAll('.service-expand-btn').forEach(btn => {
     btn.addEventListener('click', () => {
