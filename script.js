@@ -275,12 +275,12 @@
         const res = await fetch(vForm.action, { method: 'POST', body: new FormData(vForm), headers: { Accept: 'application/json' } });
         if (res.ok) {
           vForm.style.display = 'none';
-          vSuccess.hidden = false;
+          vSuccess.style.display = 'flex';
         } else { throw new Error(); }
       } catch {
         btn.innerHTML = orig;
         btn.disabled = false;
-        vError.hidden = false;
+        vError.style.display = 'flex';
       }
     });
   }
