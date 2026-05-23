@@ -261,26 +261,28 @@
 
 
   /* ── VOLUNTEER FORM ── */
-  const vForm    = document.getElementById('volunteerForm');
-  const vSuccess = document.getElementById('volunteerSuccess');
-  const vError   = document.getElementById('volunteerError');
+  const vForm = document.getElementById('volunteerForm');
   if (vForm) {
     vForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const btn = vForm.querySelector('.vform-submit');
-      const orig = btn.innerHTML;
-      btn.disabled = true;
+      const btn     = vForm.querySelector('.vform-submit');
+      const success = document.getElementById('volunteerSuccess');
+      const error   = document.getElementById('volunteerError');
+      const orig    = btn.innerHTML;
+      btn.disabled  = true;
       btn.innerHTML = '… wird gesendet';
       try {
         const res = await fetch(vForm.action, { method: 'POST', body: new FormData(vForm), headers: { Accept: 'application/json' } });
         if (res.ok) {
           vForm.style.display = 'none';
-          vSuccess.style.display = 'flex';
-        } else { throw new Error(); }
+          success.style.display = 'flex';
+        } else {
+          throw new Error();
+        }
       } catch {
         btn.innerHTML = orig;
-        btn.disabled = false;
-        vError.style.display = 'flex';
+        btn.disabled  = false;
+        error.style.display = 'flex';
       }
     });
   }
