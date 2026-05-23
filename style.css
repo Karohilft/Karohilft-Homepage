@@ -1228,7 +1228,6 @@ section { position: relative; }
   border-radius: var(--r-md);
   padding: 1.6rem;
   text-align: center;
-  border-left: 3px solid var(--rose);
 }
 .contact-promise-icon {
   font-size: 1.6rem;
