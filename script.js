@@ -225,6 +225,11 @@
   const formSuccess = document.getElementById('formSuccess');
 
   if (form) {
+    form.querySelector('#email').addEventListener('input', (e) => {
+      let rt = form.querySelector('[name="_replyto"]');
+      if (!rt) { rt = Object.assign(document.createElement('input'), { type: 'hidden', name: '_replyto' }); form.appendChild(rt); }
+      rt.value = e.target.value;
+    });
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -263,6 +268,9 @@
   /* ── VOLUNTEER FORM ── */
   const vForm = document.getElementById('volunteerForm');
   if (vForm) {
+    vForm.querySelector('#vEmail').addEventListener('input', (e) => {
+      vForm.querySelector('[name="_replyto"]').value = e.target.value;
+    });
     vForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn     = vForm.querySelector('.vform-submit');
