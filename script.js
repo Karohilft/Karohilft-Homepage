@@ -156,16 +156,14 @@
 
   /* ── FLOATING CTA ── */
   const floatingCta = document.getElementById('floatingCta');
+  const floatingWa  = document.getElementById('floatingWa');
   const heroSection = document.getElementById('hero');
 
-  if (floatingCta && heroSection) {
+  if (heroSection) {
     const ctaObs = new IntersectionObserver((entries) => {
-      // Show floating CTA when hero is no longer visible
-      if (!entries[0].isIntersecting) {
-        floatingCta.classList.add('visible');
-      } else {
-        floatingCta.classList.remove('visible');
-      }
+      const show = !entries[0].isIntersecting;
+      if (floatingCta) floatingCta.classList.toggle('visible', show);
+      if (floatingWa)  floatingWa.classList.toggle('visible', show);
     }, { threshold: 0.1 });
 
     ctaObs.observe(heroSection);
@@ -225,6 +223,11 @@
   const formSuccess = document.getElementById('formSuccess');
 
   if (form) {
+    form.querySelector('#email').addEventListener('input', (e) => {
+      let rt = form.querySelector('[name="_replyto"]');
+      if (!rt) { rt = Object.assign(document.createElement('input'), { type: 'hidden', name: '_replyto' }); form.appendChild(rt); }
+      rt.value = e.target.value;
+    });
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -242,7 +245,7 @@
         });
 
         if (res.ok) {
-          form.hidden = true;
+          form.style.display = 'none';
           formSuccess.hidden = false;
           formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
         } else {
@@ -260,7 +263,70 @@
   }
 
 
-  /* ── ACTIVE NAV LINK ON SCROLL ── */
+  /* ── VOLUNTEER FORM ── */
+  const vForm = document.getElementById('volunteerForm');
+  if (vForm) {
+    vForm.querySelector('#vEmail').addEventListener('input', (e) => {
+      vForm.querySelector('[name="_replyto"]').value = e.target.value;
+    });
+    vForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn     = vForm.querySelector('.vform-submit');
+      const success = document.getElementById('volunteerSuccess');
+      const error   = document.getElementById('volunteerError');
+      const orig    = btn.innerHTML;
+      btn.disabled  = true;
+      btn.innerHTML = '… wird gesendet';
+      try {
+        const res = await fetch(vForm.action, { method: 'POST', body: new FormData(vForm), headers: { Accept: 'application/json' } });
+        if (res.ok) {
+          vForm.style.display = 'none';
+          success.style.display = 'flex';
+        } else {
+          throw new Error();
+        }
+      } catch {
+        btn.innerHTML = orig;
+        btn.disabled  = false;
+        error.style.display = 'flex';
+      }
+    });
+  }
+
+
+  /* ── FAQ ACCORDION ── */
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling;
+      const open   = btn.getAttribute('aria-expanded') === 'true';
+      // close all others
+      document.querySelectorAll('.faq-q[aria-expanded="true"]').forEach(other => {
+        if (other !== btn) {
+          other.setAttribute('aria-expanded', 'false');
+          other.nextElementSibling.classList.remove('open');
+        }
+      });
+      btn.setAttribute('aria-expanded', String(!open));
+      answer.classList.toggle('open', !open);
+    });
+  });
+
+
+  /* ── SERVICE CARD EXPAND ── */
+  document.querySelectorAll('.service-expand-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card   = btn.closest('.service-card');
+      const detail = card.querySelector('.service-detail');
+      const open   = btn.getAttribute('aria-expanded') === 'true';
+
+      btn.setAttribute('aria-expanded', String(!open));
+      detail.classList.toggle('open', !open);
+      btn.firstChild.textContent = open ? 'Mehr erfahren' : 'Weniger ';
+    });
+  });
+
+
+/* ── ACTIVE NAV LINK ON SCROLL ── */
   const sections = document.querySelectorAll('section[id]');
   const navLinks  = document.querySelectorAll('.nav-links a');
 
