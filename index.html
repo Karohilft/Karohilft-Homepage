@@ -651,8 +651,9 @@
           <label class="calc-label" for="calcBundesland">Bundesland</label>
           <div class="calc-select-wrap">
             <select id="calcBundesland" class="calc-select">
+              <option value="" disabled selected>Bitte auswählen …</option>
               <option value="wien">Wien</option>
-              <option value="noe" selected>Niederösterreich</option>
+              <option value="noe">Niederösterreich</option>
               <option value="bgld">Burgenland</option>
             </select>
             <svg class="calc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
@@ -662,9 +663,10 @@
           <label class="calc-label" for="calcStufe">Pflegestufe</label>
           <div class="calc-select-wrap">
             <select id="calcStufe" class="calc-select">
+              <option value="" disabled selected>Bitte auswählen …</option>
               <option value="1">Pflegestufe 1</option>
               <option value="2">Pflegestufe 2</option>
-              <option value="3" selected>Pflegestufe 3</option>
+              <option value="3">Pflegestufe 3</option>
               <option value="4">Pflegestufe 4</option>
               <option value="5">Pflegestufe 5</option>
               <option value="6">Pflegestufe 6</option>
@@ -678,12 +680,12 @@
       <div class="calc-result-box">
         <div class="calc-result-label">VORAUSSICHTLICHER EIGENANTEIL (28 TAGE)</div>
         <div class="calc-result-row">
-          <span class="calc-result-amount" id="calcTotal">1.607,40</span>
-          <span class="calc-result-unit">EUR</span>
+          <span class="calc-result-amount" id="calcTotal">—</span>
+          <span class="calc-result-unit" id="calcUnit" style="visibility:hidden">EUR</span>
         </div>
       </div>
 
-      <button class="calc-toggle-btn" id="calcToggleBtn" type="button">
+      <button class="calc-toggle-btn" id="calcToggleBtn" type="button" style="display:none">
         <svg class="calc-toggle-icon" id="calcToggleIcon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
         <span id="calcToggleText">Details anzeigen</span>
       </button>
@@ -727,7 +729,7 @@
       </div>
 
       <p class="calc-note">
-        <strong>Hinweis:</strong> Alle Beträge sind Richtwerte für einen 28-Tage-Turnus. Bundesförderung gilt ab Pflegestufe 3 bei Nettoeinkommen unter €&thinsp;2.500/Monat. Pflegegeldbeträge 2026 (ab Jänner 2026). Landesförderung Burgenland ab Pflegestufe 3. Wir beraten Sie kostenlos bei allen Förderanträgen.
+        <strong>Bitte beachten:</strong> Diese Berechnung dient ausschließlich zur ersten Orientierung. Der angezeigte Betrag ist kein Angebot und keine Zusage — der tatsächliche Eigenanteil hängt von Ihrer persönlichen Situation, dem konkreten Tagessatz und den jeweiligen Förderbescheiden ab. Preisänderungen sind möglich. Lassen Sie sich von uns kostenlos und unverbindlich beraten — wir rechnen gemeinsam mit Ihnen durch, was in Ihrem Fall wirklich möglich ist.
       </p>
     </div>
   </div>

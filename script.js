@@ -369,6 +369,18 @@
     function calcUpdate() {
       const bl    = document.getElementById('calcBundesland').value;
       const stufe = parseInt(document.getElementById('calcStufe').value, 10);
+      const totalEl = document.getElementById('calcTotal');
+      const unitEl  = document.getElementById('calcUnit');
+      const toggleBtn = document.getElementById('calcToggleBtn');
+
+      if (!bl || !stufe) {
+        if (totalEl) totalEl.textContent = '—';
+        if (unitEl)  unitEl.style.visibility = 'hidden';
+        if (toggleBtn) toggleBtn.style.display = 'none';
+        return;
+      }
+
+      if (toggleBtn) toggleBtn.style.display = '';
 
       const tagessatz28 = 90 * 28;
       const agentur     = 280;
@@ -379,7 +391,6 @@
 
       const total = Math.max(0, tagessatz28 + agentur + reise - bundesf - landesf - pflegegeld);
 
-      const totalEl = document.getElementById('calcTotal');
       if (totalEl) {
         totalEl.style.opacity = '0.4';
         setTimeout(() => {
@@ -387,6 +398,7 @@
           totalEl.style.opacity = '1';
         }, 120);
       }
+      if (unitEl) unitEl.style.visibility = 'visible';
 
       set('d_tagessatz', fmtEUR(tagessatz28));
       set('d_agentur',   fmtEUR(agentur));
@@ -423,8 +435,8 @@
     const resetBtn = document.getElementById('calcResetBtn');
     if (resetBtn) {
       resetBtn.addEventListener('click', () => {
-        blSel.value = 'noe';
-        stSel.value = '3';
+        blSel.value = '';
+        stSel.value = '';
         calcUpdate();
         if (detailsDiv) detailsDiv.style.display = 'none';
         if (toggleIcon) toggleIcon.classList.remove('open');
