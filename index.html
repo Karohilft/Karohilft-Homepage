@@ -633,6 +633,108 @@
 
 
 <!-- ════════════════════════════════════════
+     KOSTENRECHNER 24h
+════════════════════════════════════════ -->
+<section class="calc-section" id="kostenrechner">
+  <div class="container">
+    <header class="section-header reveal">
+      <span class="section-tag">Was kostet 24h-Betreuung?</span>
+      <h2 class="section-title">Kostenrechner<br /><em>24-Stunden-Betreuung.</em></h2>
+      <p class="section-sub">Wählen Sie Bundesland und Pflegestufe — und sehen Sie sofort Ihren geschätzten Eigenanteil.</p>
+    </header>
+
+    <div class="calc-card glass reveal">
+      <p class="calc-prompt">Bitte wählen Sie <strong>Bundesland</strong> und <strong>Pflegestufe</strong></p>
+
+      <div class="calc-inputs">
+        <div class="calc-field">
+          <label class="calc-label" for="calcBundesland">Bundesland</label>
+          <div class="calc-select-wrap">
+            <select id="calcBundesland" class="calc-select">
+              <option value="wien">Wien</option>
+              <option value="noe" selected>Niederösterreich</option>
+              <option value="bgld">Burgenland</option>
+            </select>
+            <svg class="calc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="calc-field">
+          <label class="calc-label" for="calcStufe">Pflegestufe</label>
+          <div class="calc-select-wrap">
+            <select id="calcStufe" class="calc-select">
+              <option value="1">Pflegestufe 1</option>
+              <option value="2">Pflegestufe 2</option>
+              <option value="3" selected>Pflegestufe 3</option>
+              <option value="4">Pflegestufe 4</option>
+              <option value="5">Pflegestufe 5</option>
+              <option value="6">Pflegestufe 6</option>
+              <option value="7">Pflegestufe 7</option>
+            </select>
+            <svg class="calc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-result-box">
+        <div class="calc-result-label">VORAUSSICHTLICHER EIGENANTEIL (28 TAGE)</div>
+        <div class="calc-result-row">
+          <span class="calc-result-amount" id="calcTotal">1.607,40</span>
+          <span class="calc-result-unit">EUR</span>
+        </div>
+      </div>
+
+      <button class="calc-toggle-btn" id="calcToggleBtn" type="button">
+        <svg class="calc-toggle-icon" id="calcToggleIcon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        <span id="calcToggleText">Details anzeigen</span>
+      </button>
+
+      <div class="calc-details" id="calcDetails">
+        <div class="calc-detail-row">
+          <span>Tagessatz (€90) × 28 Tage</span>
+          <span id="d_tagessatz">2.520,00</span>
+        </div>
+        <div class="calc-detail-row">
+          <span>Karohilft Agenturhonorar</span>
+          <span id="d_agentur">280,00</span>
+        </div>
+        <div class="calc-detail-row">
+          <span>Reisekosten</span>
+          <span id="d_reise">200,00</span>
+        </div>
+        <div class="calc-detail-sep" aria-hidden="true"></div>
+        <div class="calc-detail-row calc-detail-minus">
+          <span>Bundesförderung</span>
+          <span id="d_bundes">− 800,00</span>
+        </div>
+        <div class="calc-detail-row calc-detail-minus">
+          <span>Landesförderung</span>
+          <span id="d_landes">0,00</span>
+        </div>
+        <div class="calc-detail-row calc-detail-minus">
+          <span id="d_pflegegeld_label">Pflegegeld</span>
+          <span id="d_pflegegeld">− 592,60</span>
+        </div>
+        <div class="calc-detail-sep" aria-hidden="true"></div>
+        <div class="calc-detail-row calc-detail-total">
+          <span>Ihr Eigenanteil</span>
+          <span id="d_total">1.607,40</span>
+        </div>
+      </div>
+
+      <div class="calc-actions">
+        <a href="#kontakt" class="btn btn-primary">Jetzt kostenlos beraten lassen</a>
+        <button class="btn btn-ghost" id="calcResetBtn" type="button">Zurücksetzen</button>
+      </div>
+
+      <p class="calc-note">
+        <strong>Hinweis:</strong> Alle Beträge sind Richtwerte für einen 28-Tage-Turnus. Bundesförderung gilt ab Pflegestufe 3 bei Nettoeinkommen unter €&thinsp;2.500/Monat. Pflegegeldbeträge 2026 (ab Jänner 2026). Landesförderung Burgenland ab Pflegestufe 3. Wir beraten Sie kostenlos bei allen Förderanträgen.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
      FAQ
 ════════════════════════════════════════ -->
 <section class="faq" id="faq">

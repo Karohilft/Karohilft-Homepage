@@ -346,4 +346,91 @@
 
   sections.forEach(s => sectionObs.observe(s));
 
+
+  /* ── KOSTENRECHNER 24h ── */
+  (function initCalc() {
+    const PFLEGEGELD = {
+      1: 206.20, 2: 380.30, 3: 592.60, 4: 888.50,
+      5: 1206.90, 6: 1685.40, 7: 2214.80
+    };
+    const STUFE_LABEL = ['', 'Stufe 1', 'Stufe 2', 'Stufe 3', 'Stufe 4', 'Stufe 5', 'Stufe 6', 'Stufe 7'];
+
+    function fmtEUR(n) {
+      return n.toFixed(2)
+        .replace('.', ',')
+        .replace(/(\d)(?=(\d{3})+,)/g, '$1.');
+    }
+
+    function set(id, val) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = val;
+    }
+
+    function calcUpdate() {
+      const bl    = document.getElementById('calcBundesland').value;
+      const stufe = parseInt(document.getElementById('calcStufe').value, 10);
+
+      const tagessatz28 = 90 * 28;
+      const agentur     = 280;
+      const reise       = 200;
+      const bundesf     = stufe >= 3 ? 800 : 0;
+      const landesf     = (bl === 'bgld' && stufe >= 3) ? 500 : 0;
+      const pflegegeld  = PFLEGEGELD[stufe];
+
+      const total = Math.max(0, tagessatz28 + agentur + reise - bundesf - landesf - pflegegeld);
+
+      const totalEl = document.getElementById('calcTotal');
+      if (totalEl) {
+        totalEl.style.opacity = '0.4';
+        setTimeout(() => {
+          totalEl.textContent = fmtEUR(total);
+          totalEl.style.opacity = '1';
+        }, 120);
+      }
+
+      set('d_tagessatz', fmtEUR(tagessatz28));
+      set('d_agentur',   fmtEUR(agentur));
+      set('d_reise',     fmtEUR(reise));
+      set('d_bundes',    bundesf > 0 ? '− ' + fmtEUR(bundesf) : fmtEUR(0));
+      set('d_landes',    landesf > 0 ? '− ' + fmtEUR(landesf) : fmtEUR(0));
+      set('d_pflegegeld', '− ' + fmtEUR(pflegegeld));
+      set('d_pflegegeld_label', 'Pflegegeld (' + STUFE_LABEL[stufe] + ')');
+      set('d_total', fmtEUR(total));
+    }
+
+    const blSel = document.getElementById('calcBundesland');
+    const stSel = document.getElementById('calcStufe');
+    if (!blSel || !stSel) return;
+
+    blSel.addEventListener('change', calcUpdate);
+    stSel.addEventListener('change', calcUpdate);
+    calcUpdate();
+
+    const toggleBtn  = document.getElementById('calcToggleBtn');
+    const detailsDiv = document.getElementById('calcDetails');
+    const toggleIcon = document.getElementById('calcToggleIcon');
+    const toggleText = document.getElementById('calcToggleText');
+
+    if (toggleBtn && detailsDiv) {
+      toggleBtn.addEventListener('click', () => {
+        const open = detailsDiv.style.display === 'block';
+        detailsDiv.style.display = open ? 'none' : 'block';
+        if (toggleIcon) toggleIcon.classList.toggle('open', !open);
+        if (toggleText) toggleText.textContent = open ? 'Details anzeigen' : 'Details ausblenden';
+      });
+    }
+
+    const resetBtn = document.getElementById('calcResetBtn');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        blSel.value = 'noe';
+        stSel.value = '3';
+        calcUpdate();
+        if (detailsDiv) detailsDiv.style.display = 'none';
+        if (toggleIcon) toggleIcon.classList.remove('open');
+        if (toggleText) toggleText.textContent = 'Details anzeigen';
+      });
+    }
+  })();
+
 })();
