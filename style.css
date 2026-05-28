@@ -2046,6 +2046,7 @@ section { position: relative; }
 
 .calc-select-wrap {
   position: relative;
+  display: block;
 }
 
 .calc-select {
@@ -2209,8 +2210,11 @@ section { position: relative; }
 .calc-note strong { color: var(--dark); }
 
 @media (max-width: 580px) {
-  .calc-inputs { grid-template-columns: 1fr; }
+  .calc-inputs { grid-template-columns: 1fr; gap: 1rem; }
   .calc-actions { flex-direction: column; }
-  .calc-actions .btn { justify-content: center; }
+  .calc-actions .btn { justify-content: center; width: 100%; }
   .calc-result-box { padding: 1.2rem 1.4rem; }
+  .calc-result-amount { font-size: 2.4rem; }
+  .calc-card { padding: 1.5rem; }
+  .calc-chevron { display: none; }
 }
