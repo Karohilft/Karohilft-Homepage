@@ -156,16 +156,14 @@
 
   /* ── FLOATING CTA ── */
   const floatingCta = document.getElementById('floatingCta');
+  const floatingWa  = document.getElementById('floatingWa');
   const heroSection = document.getElementById('hero');
 
-  if (floatingCta && heroSection) {
+  if (heroSection) {
     const ctaObs = new IntersectionObserver((entries) => {
-      // Show floating CTA when hero is no longer visible
-      if (!entries[0].isIntersecting) {
-        floatingCta.classList.add('visible');
-      } else {
-        floatingCta.classList.remove('visible');
-      }
+      const show = !entries[0].isIntersecting;
+      if (floatingCta) floatingCta.classList.toggle('visible', show);
+      if (floatingWa)  floatingWa.classList.toggle('visible', show);
     }, { threshold: 0.1 });
 
     ctaObs.observe(heroSection);
