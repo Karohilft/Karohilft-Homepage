@@ -66,6 +66,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.karohilft.at/faq.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.karohilft.at/impressum.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
