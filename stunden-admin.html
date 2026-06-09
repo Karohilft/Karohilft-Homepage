@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Stunden-Übersicht – Karohilft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream:      #FAF5EE;
+      --cream-alt:  #F3EAE0;
+      --rose:       #C47C5A;
+      --rose-light: #DFA88C;
+      --rose-pale:  #F8ECE5;
+      --rose-dark:  #9E5E40;
+      --sage:       #7A9E8E;
+      --sage-pale:  #E5EFEB;
+      --sage-dark:  #5A7D6E;
+      --dark:       #1C1814;
+      --mid:        #5A5250;
+      --muted:      #9A9590;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+      --r-sm: 12px; --r-md: 20px; --r-lg: 32px;
+      --shadow-md: 0 8px 40px rgba(28,24,20,0.10);
+      --shadow-sm: 0 2px 16px rgba(28,24,20,0.06);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: var(--font-body); background: var(--cream); min-height: 100vh; }
+
+    /* ── Login-Overlay ── */
+    #login-overlay {
+      position: fixed; inset: 0;
+      background: var(--cream);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 100;
+      padding: 20px;
+    }
+    .login-card {
+      background: #fff;
+      border-radius: var(--r-lg);
+      box-shadow: var(--shadow-md);
+      padding: 44px 40px;
+      width: 100%; max-width: 380px;
+      text-align: center;
+    }
+    .login-logo {
+      width: 56px; height: 56px;
+      background: var(--rose);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      color: #fff; font-size: 28px; font-weight: 600;
+      margin: 0 auto 20px;
+    }
+    .login-title { font-family: var(--font-display); font-size: 26px; color: var(--dark); margin-bottom: 6px; }
+    .login-sub { font-size: 14px; color: var(--muted); margin-bottom: 28px; }
+    .login-card input[type="password"] {
+      width: 100%; padding: 13px 14px;
+      border: 1.5px solid var(--cream-alt);
+      border-radius: var(--r-sm);
+      font-family: var(--font-body); font-size: 15px; color: var(--dark);
+      background: var(--cream); outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 14px;
+    }
+    .login-card input:focus { border-color: var(--rose); background: #fff; }
+    .login-error { color: #B71C1C; font-size: 13px; margin-bottom: 12px; display: none; }
+    .btn-login {
+      width: 100%; padding: 13px;
+      background: var(--rose); color: #fff; border: none;
+      border-radius: var(--r-sm); font-family: var(--font-body);
+      font-size: 15px; font-weight: 600; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-login:hover { background: var(--rose-dark); }
+
+    /* ── App-Layout ── */
+    #app { display: none; }
+    .topbar {
+      background: #fff;
+      border-bottom: 1px solid var(--cream-alt);
+      padding: 0 32px;
+      height: 60px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .topbar-logo { font-family: var(--font-display); font-size: 20px; color: var(--dark); font-weight: 600; }
+    .topbar-sep { color: var(--muted); margin: 0 4px; }
+    .topbar-title { font-size: 14px; color: var(--mid); font-weight: 500; }
+    .topbar-right { margin-left: auto; display: flex; align-items: center; gap: 16px; }
+    .btn-logout {
+      padding: 7px 14px; background: transparent;
+      border: 1.5px solid var(--cream-alt);
+      border-radius: 100px; font-size: 13px; color: var(--mid);
+      cursor: pointer; transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-logout:hover { border-color: var(--rose); color: var(--rose); }
+    .btn-eintrag {
+      padding: 8px 16px; background: var(--rose); color: #fff; border: none;
+      border-radius: 100px; font-size: 13px; font-weight: 600;
+      cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+    }
+    .btn-eintrag:hover { background: var(--rose-dark); }
+
+    .main { max-width: 1100px; margin: 0 auto; padding: 32px 24px 64px; }
+
+    /* ── Controls ── */
+    .controls {
+      display: flex; align-items: center; gap: 12px;
+      flex-wrap: wrap; margin-bottom: 28px;
+    }
+    .month-nav {
+      display: flex; align-items: center; gap: 8px;
+      background: #fff; border-radius: 100px;
+      box-shadow: var(--shadow-sm);
+      padding: 6px 8px;
+    }
+    .month-btn {
+      width: 32px; height: 32px; border: none; background: transparent;
+      border-radius: 50%; cursor: pointer; font-size: 16px; color: var(--mid);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s;
+    }
+    .month-btn:hover { background: var(--cream); }
+    .month-label { font-weight: 600; font-size: 15px; color: var(--dark); min-width: 140px; text-align: center; }
+    .filter-select {
+      padding: 9px 36px 9px 12px;
+      border: 1.5px solid var(--cream-alt);
+      border-radius: 100px;
+      font-family: var(--font-body); font-size: 13px; color: var(--dark);
+      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%239A9590' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 10px center;
+      -webkit-appearance: none; appearance: none; outline: none; cursor: pointer;
+    }
+    .btn-export {
+      margin-left: auto; padding: 9px 18px;
+      background: var(--sage-pale); color: var(--sage-dark);
+      border: none; border-radius: 100px; font-family: var(--font-body);
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-export:hover { background: var(--sage-light); }
+
+    /* ── Demo-Banner ── */
+    .demo-banner {
+      background: #FFF8E1; border: 1.5px solid #FFD54F;
+      border-radius: var(--r-sm); padding: 12px 16px;
+      font-size: 13px; color: #795548; margin-bottom: 24px; display: none;
+    }
+    .demo-banner.visible { display: block; }
+
+    /* ── Zusammenfassung ── */
+    .section-title {
+      font-family: var(--font-display); font-size: 22px;
+      color: var(--dark); margin-bottom: 14px;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 36px;
+    }
+    .summary-card {
+      background: #fff; border-radius: var(--r-md);
+      box-shadow: var(--shadow-sm); padding: 20px;
+    }
+    .summary-card-name { font-weight: 600; font-size: 15px; color: var(--dark); margin-bottom: 12px; }
+    .summary-rows {}
+    .summary-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 5px 0; border-bottom: 1px solid var(--cream-alt);
+      font-size: 13px;
+    }
+    .summary-row:last-child { border-bottom: none; }
+    .summary-row .fam { color: var(--mid); }
+    .summary-row .std { color: var(--rose); font-weight: 600; }
+    .summary-total {
+      display: flex; justify-content: space-between;
+      margin-top: 12px; padding-top: 10px;
+      border-top: 2px solid var(--cream-alt);
+      font-weight: 700; font-size: 15px;
+    }
+    .summary-total .label { color: var(--mid); }
+    .summary-total .value { color: var(--dark); }
+
+    .no-data {
+      text-align: center; padding: 48px 20px;
+      color: var(--muted); font-size: 15px;
+      background: #fff; border-radius: var(--r-md);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* ── Detailtabelle ── */
+    .table-wrap {
+      background: #fff; border-radius: var(--r-md);
+      box-shadow: var(--shadow-sm); overflow: hidden;
+    }
+    .table-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 20px 14px; border-bottom: 1px solid var(--cream-alt);
+    }
+    .table-header-title { font-family: var(--font-display); font-size: 20px; color: var(--dark); }
+    .table-count { font-size: 13px; color: var(--muted); }
+
+    table { width: 100%; border-collapse: collapse; }
+    thead th {
+      padding: 12px 16px; text-align: left;
+      font-size: 12px; font-weight: 600; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.06em;
+      background: var(--cream); border-bottom: 1px solid var(--cream-alt);
+    }
+    tbody tr { border-bottom: 1px solid var(--cream-alt); transition: background 0.12s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--cream); }
+    tbody td { padding: 12px 16px; font-size: 14px; color: var(--dark); }
+    .td-stunden { font-weight: 600; color: var(--rose); }
+    .td-notizen { color: var(--muted); font-size: 13px; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .td-delete {
+      background: none; border: none; cursor: pointer; color: var(--muted);
+      font-size: 16px; padding: 4px 6px; border-radius: 6px;
+      transition: color 0.15s, background 0.15s;
+    }
+    .td-delete:hover { color: #B71C1C; background: #FFEBEE; }
+
+    .table-empty { padding: 36px; text-align: center; color: var(--muted); font-size: 14px; }
+
+    @media (max-width: 700px) {
+      .topbar { padding: 0 16px; }
+      .main { padding: 20px 14px 48px; }
+      table { font-size: 13px; }
+      thead th, tbody td { padding: 10px 10px; }
+      .td-notizen { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login -->
+  <div id="login-overlay">
+    <div class="login-card">
+      <div class="login-logo">K</div>
+      <div class="login-title">Admin-Bereich</div>
+      <p class="login-sub">Bitte Passwort eingeben</p>
+      <input type="password" id="pw-input" placeholder="Passwort …" autocomplete="current-password">
+      <p class="login-error" id="login-error">Falsches Passwort</p>
+      <button class="btn-login" onclick="login()">Anmelden</button>
+    </div>
+  </div>
+
+  <!-- App -->
+  <div id="app">
+    <div class="topbar">
+      <span class="topbar-logo">Karohilft</span>
+      <span class="topbar-sep">|</span>
+      <span class="topbar-title">Stunden-Übersicht</span>
+      <div class="topbar-right">
+        <a href="stunden-erfassung.html" class="btn-eintrag" target="_blank">+ Eintrag</a>
+        <button class="btn-logout" onclick="logout()">Abmelden</button>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="demo-banner" id="demo-banner">
+        Demo-Modus aktiv – Daten werden nur lokal im Browser gespeichert.
+        Für echten Betrieb: Supabase einrichten und in <code>stunden-config.js</code> eintragen.
+      </div>
+
+      <!-- Monat + Filter -->
+      <div class="controls">
+        <div class="month-nav">
+          <button class="month-btn" onclick="wechselMonat(-1)">&#8249;</button>
+          <span class="month-label" id="month-label"></span>
+          <button class="month-btn" onclick="wechselMonat(1)">&#8250;</button>
+        </div>
+        <select class="filter-select" id="filter-betreuer" onchange="rendereAlles()">
+          <option value="">Alle Betreuer/innen</option>
+        </select>
+        <select class="filter-select" id="filter-familie" onchange="rendereAlles()">
+          <option value="">Alle Familien</option>
+        </select>
+        <button class="btn-export" onclick="exportCSV()">&#11015; CSV Export</button>
+      </div>
+
+      <!-- Zusammenfassung -->
+      <div class="section-title" id="summary-title"></div>
+      <div id="summary-container"></div>
+
+      <!-- Detail-Tabelle -->
+      <div class="table-wrap" style="margin-top:32px">
+        <div class="table-header">
+          <span class="table-header-title">Alle Einträge</span>
+          <span class="table-count" id="table-count"></span>
+        </div>
+        <div id="table-container"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="stunden-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script>
+    /* ── Auth ────────────────────────────────────────────────── */
+    function login() {
+      const pw = document.getElementById('pw-input').value;
+      if (pw === window.ADMIN_PASSWORT) {
+        sessionStorage.setItem('kh_admin', '1');
+        document.getElementById('login-overlay').style.display = 'none';
+        document.getElementById('app').style.display = 'block';
+        init();
+      } else {
+        document.getElementById('login-error').style.display = 'block';
+      }
+    }
+    function logout() {
+      sessionStorage.removeItem('kh_admin');
+      location.reload();
+    }
+    document.getElementById('pw-input').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+
+    if (sessionStorage.getItem('kh_admin') === '1') {
+      document.getElementById('login-overlay').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+    }
+
+    /* ── Supabase / Demo-Setup ───────────────────────────────── */
+    let supabaseClient = null;
+    let alleEintraege  = [];
+
+    if (!window.DEMO_MODUS && window.SUPABASE_URL && window.SUPABASE_KEY) {
+      const { createClient } = window.supabase;
+      supabaseClient = createClient(window.SUPABASE_URL, window.SUPABASE_KEY);
+    } else {
+      document.getElementById('demo-banner').classList.add('visible');
+    }
+
+    /* ── Monats-Navigation ───────────────────────────────────── */
+    const heute = new Date();
+    let aktivesJahr  = heute.getFullYear();
+    let aktiverMonat = heute.getMonth(); // 0-basiert
+
+    const MONATE_DE = ['Jänner','Februar','März','April','Mai','Juni',
+                       'Juli','August','September','Oktober','November','Dezember'];
+
+    function wechselMonat(delta) {
+      aktiverMonat += delta;
+      if (aktiverMonat < 0)  { aktiverMonat = 11; aktivesJahr--; }
+      if (aktiverMonat > 11) { aktiverMonat = 0;  aktivesJahr++; }
+      ladeDaten();
+    }
+
+    function aktualisiereMonatLabel() {
+      document.getElementById('month-label').textContent = `${MONATE_DE[aktiverMonat]} ${aktivesJahr}`;
+    }
+
+    /* ── Daten laden ─────────────────────────────────────────── */
+    async function ladeDaten() {
+      aktualisiereMonatLabel();
+      const vonDatum = `${aktivesJahr}-${String(aktiverMonat+1).padStart(2,'0')}-01`;
+      const bisDatum = new Date(aktivesJahr, aktiverMonat+1, 0).toISOString().slice(0,10);
+
+      if (supabaseClient) {
+        const { data, error } = await supabaseClient
+          .from('stunden_eintraege')
+          .select('*')
+          .gte('datum', vonDatum)
+          .lte('datum', bisDatum)
+          .order('datum', { ascending: false });
+        if (error) { console.error(error); return; }
+        alleEintraege = data || [];
+      } else {
+        const alle = JSON.parse(localStorage.getItem('karohilft_stunden') || '[]');
+        alleEintraege = alle.filter(e => e.datum >= vonDatum && e.datum <= bisDatum);
+        alleEintraege.sort((a,b) => b.datum.localeCompare(a.datum));
+      }
+
+      aktualisiereFilter();
+      rendereAlles();
+    }
+
+    function aktualisiereFilter() {
+      const betreuerSel = document.getElementById('filter-betreuer');
+      const famSel      = document.getElementById('filter-familie');
+      const aktBetreuer = betreuerSel.value;
+      const aktFam      = famSel.value;
+
+      const betreuer = [...new Set(alleEintraege.map(e => e.betreuer))].sort();
+      const familien = [...new Set(alleEintraege.map(e => e.familie))].sort();
+
+      betreuerSel.innerHTML = '<option value="">Alle Betreuer/innen</option>' +
+        betreuer.map(b => `<option value="${esc(b)}" ${b===aktBetreuer?'selected':''}>${esc(b)}</option>`).join('');
+      famSel.innerHTML = '<option value="">Alle Familien</option>' +
+        familien.map(f => `<option value="${esc(f)}" ${f===aktFam?'selected':''}>${esc(f)}</option>`).join('');
+    }
+
+    function gefilterteEintraege() {
+      const b = document.getElementById('filter-betreuer').value;
+      const f = document.getElementById('filter-familie').value;
+      return alleEintraege.filter(e =>
+        (!b || e.betreuer === b) && (!f || e.familie === f)
+      );
+    }
+
+    /* ── Rendern ─────────────────────────────────────────────── */
+    function rendereAlles() {
+      const eintraege = gefilterteEintraege();
+      rendereSummary(eintraege);
+      rendereTabelle(eintraege);
+    }
+
+    function rendereSummary(eintraege) {
+      const title = document.getElementById('summary-title');
+      const cont  = document.getElementById('summary-container');
+      title.textContent = `Zusammenfassung – ${MONATE_DE[aktiverMonat]} ${aktivesJahr}`;
+
+      if (!eintraege.length) {
+        cont.innerHTML = '<div class="no-data">Keine Einträge für diesen Monat gefunden.</div>';
+        return;
+      }
+
+      // Gruppieren nach Betreuer → Familie
+      const map = {};
+      eintraege.forEach(e => {
+        if (!map[e.betreuer]) map[e.betreuer] = {};
+        if (!map[e.betreuer][e.familie]) map[e.betreuer][e.familie] = 0;
+        map[e.betreuer][e.familie] += Number(e.stunden);
+      });
+
+      const karten = Object.entries(map).sort(([a],[b]) => a.localeCompare(b)).map(([betreuer, fams]) => {
+        const gesamtStd = Object.values(fams).reduce((s,h) => s+h, 0);
+        const rows = Object.entries(fams).sort(([a],[b]) => a.localeCompare(b))
+          .map(([fam, std]) =>
+            `<div class="summary-row">
+               <span class="fam">${esc(fam)}</span>
+               <span class="std">${formatStd(std)}</span>
+             </div>`
+          ).join('');
+        return `<div class="summary-card">
+          <div class="summary-card-name">${esc(betreuer)}</div>
+          <div class="summary-rows">${rows}</div>
+          <div class="summary-total">
+            <span class="label">Gesamt</span>
+            <span class="value">${formatStd(gesamtStd)}</span>
+          </div>
+        </div>`;
+      }).join('');
+
+      cont.innerHTML = `<div class="summary-grid">${karten}</div>`;
+    }
+
+    function rendereTabelle(eintraege) {
+      const cont = document.getElementById('table-container');
+      document.getElementById('table-count').textContent = `${eintraege.length} Einträge`;
+
+      if (!eintraege.length) {
+        cont.innerHTML = '<div class="table-empty">Keine Einträge gefunden.</div>';
+        return;
+      }
+
+      const zeilen = eintraege.map(e => `
+        <tr>
+          <td>${formatDatum(e.datum)}</td>
+          <td>${esc(e.betreuer)}</td>
+          <td>${esc(e.familie)}</td>
+          <td>${e.von_uhrzeit}</td>
+          <td>${e.bis_uhrzeit}</td>
+          <td class="td-stunden">${formatStd(e.stunden)}</td>
+          <td class="td-notizen" title="${esc(e.notizen||'')}">${esc(e.notizen||'–')}</td>
+          <td><button class="td-delete" onclick="loescheEintrag('${e.id}')" title="Löschen">✕</button></td>
+        </tr>`).join('');
+
+      cont.innerHTML = `<table>
+        <thead><tr>
+          <th>Datum</th><th>Betreuer/in</th><th>Familie</th>
+          <th>Von</th><th>Bis</th><th>Stunden</th>
+          <th>Anmerkung</th><th></th>
+        </tr></thead>
+        <tbody>${zeilen}</tbody>
+      </table>`;
+    }
+
+    /* ── Löschen ─────────────────────────────────────────────── */
+    async function loescheEintrag(id) {
+      if (!confirm('Diesen Eintrag wirklich löschen?')) return;
+      if (supabaseClient) {
+        await supabaseClient.from('stunden_eintraege').delete().eq('id', id);
+      } else {
+        const alle = JSON.parse(localStorage.getItem('karohilft_stunden') || '[]');
+        localStorage.setItem('karohilft_stunden', JSON.stringify(alle.filter(e => e.id !== id)));
+      }
+      ladeDaten();
+    }
+
+    /* ── CSV Export ──────────────────────────────────────────── */
+    function exportCSV() {
+      const eintraege = gefilterteEintraege();
+      if (!eintraege.length) { alert('Keine Einträge zum Exportieren.'); return; }
+
+      const header = ['Datum','Betreuer/in','Familie','Von','Bis','Stunden','Anmerkung'];
+      const zeilen = eintraege.map(e => [
+        e.datum, e.betreuer, e.familie,
+        e.von_uhrzeit, e.bis_uhrzeit,
+        String(e.stunden).replace('.',','),
+        e.notizen || ''
+      ].map(v => `"${String(v).replace(/"/g,'""')}"`).join(';'));
+
+      const csv = '﻿' + [header.join(';'), ...zeilen].join('\r\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `karohilft-stunden-${aktivesJahr}-${String(aktiverMonat+1).padStart(2,'0')}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    /* ── Hilfsfunktionen ─────────────────────────────────────── */
+    function formatStd(std) {
+      const s = Number(std);
+      const h = Math.floor(s);
+      const m = Math.round((s - h) * 60);
+      if (h > 0 && m > 0) return `${h} Std. ${m} Min.`;
+      if (h > 0) return `${h} Std.`;
+      return `${m} Min.`;
+    }
+    function formatDatum(d) {
+      const [y,m,t] = d.split('-');
+      return `${t}.${m}.${y}`;
+    }
+    function esc(s) {
+      return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    /* ── Start ───────────────────────────────────────────────── */
+    function init() {
+      ladeDaten();
+    }
+    if (sessionStorage.getItem('kh_admin') === '1') init();
+  </script>
+</body>
+</html>

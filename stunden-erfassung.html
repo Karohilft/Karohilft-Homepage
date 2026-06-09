@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Stundeneintrag – Karohilft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream:      #FAF5EE;
+      --cream-alt:  #F3EAE0;
+      --rose:       #C47C5A;
+      --rose-light: #DFA88C;
+      --rose-pale:  #F8ECE5;
+      --rose-dark:  #9E5E40;
+      --sage:       #7A9E8E;
+      --sage-pale:  #E5EFEB;
+      --sage-dark:  #5A7D6E;
+      --dark:       #1C1814;
+      --mid:        #5A5250;
+      --muted:      #9A9590;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+      --r-sm: 12px; --r-md: 20px; --r-lg: 32px;
+      --shadow-md: 0 8px 40px rgba(28,24,20,0.10);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: var(--font-body);
+      background: var(--cream);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 48px;
+    }
+
+    .header {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .header a { text-decoration: none; display: flex; align-items: center; gap: 10px; }
+    .header-logo {
+      width: 36px; height: 36px;
+      background: var(--rose);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .header-name {
+      font-family: var(--font-display);
+      font-size: 22px;
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 480px;
+      background: #fff;
+      border-radius: var(--r-lg);
+      box-shadow: var(--shadow-md);
+      padding: 36px 32px 40px;
+    }
+    @media (max-width: 480px) {
+      .card { padding: 28px 20px 32px; border-radius: var(--r-md); }
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 28px;
+      color: var(--dark);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .card-subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .field { margin-bottom: 20px; }
+    .field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--mid);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 7px;
+    }
+    .field select,
+    .field input[type="date"],
+    .field input[type="time"],
+    .field textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--cream-alt);
+      border-radius: var(--r-sm);
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--dark);
+      background: var(--cream);
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239A9590' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+    }
+    .field select:focus,
+    .field input:focus,
+    .field textarea:focus {
+      border-color: var(--rose);
+      background: #fff;
+    }
+    .field textarea { resize: vertical; min-height: 80px; }
+
+    .time-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .dauer-box {
+      background: var(--sage-pale);
+      border-radius: var(--r-sm);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .dauer-icon { font-size: 18px; }
+    .dauer-label { font-size: 13px; color: var(--sage-dark); font-weight: 600; }
+    .dauer-value { font-size: 16px; color: var(--dark); font-weight: 600; margin-left: auto; }
+
+    .demo-banner {
+      background: #FFF8E1;
+      border: 1.5px solid #FFD54F;
+      border-radius: var(--r-sm);
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #795548;
+      margin-bottom: 20px;
+      display: none;
+    }
+    .demo-banner.visible { display: block; }
+
+    .error-msg {
+      background: #FFEBEE;
+      border: 1.5px solid #EF9A9A;
+      border-radius: var(--r-sm);
+      padding: 10px 14px;
+      font-size: 14px;
+      color: #B71C1C;
+      margin-bottom: 20px;
+      display: none;
+    }
+    .error-msg.visible { display: block; }
+
+    .btn-submit {
+      width: 100%;
+      padding: 15px;
+      background: var(--rose);
+      color: #fff;
+      border: none;
+      border-radius: var(--r-sm);
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-submit:hover { background: var(--rose-dark); }
+    .btn-submit:active { transform: scale(0.99); }
+    .btn-submit:disabled { background: var(--muted); cursor: not-allowed; }
+
+    /* ── Erfolgs-Ansicht ── */
+    #view-success { display: none; }
+    .success-icon {
+      width: 64px; height: 64px;
+      background: var(--sage-pale);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px;
+      margin: 0 auto 20px;
+    }
+    .success-title {
+      font-family: var(--font-display);
+      font-size: 26px;
+      color: var(--dark);
+      text-align: center;
+      margin-bottom: 6px;
+    }
+    .success-sub {
+      font-size: 14px;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .success-detail {
+      background: var(--cream);
+      border-radius: var(--r-sm);
+      padding: 16px 18px;
+      margin-bottom: 24px;
+    }
+    .success-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      padding: 5px 0;
+      border-bottom: 1px solid var(--cream-alt);
+    }
+    .success-row:last-child { border-bottom: none; }
+    .success-row span:first-child { color: var(--muted); }
+    .success-row span:last-child { color: var(--dark); font-weight: 500; }
+    .btn-new {
+      width: 100%;
+      padding: 13px;
+      background: transparent;
+      color: var(--rose);
+      border: 2px solid var(--rose);
+      border-radius: var(--r-sm);
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-new:hover { background: var(--rose-pale); }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <a href="/">
+      <div class="header-logo">K</div>
+      <span class="header-name">Karohilft</span>
+    </a>
+  </div>
+
+  <div class="card">
+
+    <!-- Formular-Ansicht -->
+    <div id="view-form">
+      <div class="card-title">Stundeneintrag</div>
+      <p class="card-subtitle">Bitte Ihren Einsatz eintragen</p>
+
+      <div class="demo-banner" id="demo-banner">
+        Demo-Modus aktiv – Einträge werden nur lokal gespeichert und gehen beim Schließen des Browsers verloren.
+      </div>
+      <div class="error-msg" id="error-msg"></div>
+
+      <form id="form-stunden" novalidate>
+
+        <div class="field">
+          <label for="betreuer">Ihr Name</label>
+          <select id="betreuer" required>
+            <option value="">– Bitte auswählen –</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="familie">Familie / Klient</label>
+          <input list="familien-list" id="familie" type="text" placeholder="Familie Maier …" autocomplete="off" required>
+          <datalist id="familien-list"></datalist>
+        </div>
+
+        <div class="field">
+          <label for="datum">Datum</label>
+          <input type="date" id="datum" required>
+        </div>
+
+        <div class="field">
+          <div class="time-row">
+            <div>
+              <label for="von">Von</label>
+              <input type="time" id="von" required>
+            </div>
+            <div>
+              <label for="bis">Bis</label>
+              <input type="time" id="bis" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="dauer-box" id="dauer-box" style="display:none">
+          <span class="dauer-icon">⏱</span>
+          <span class="dauer-label">Dauer</span>
+          <span class="dauer-value" id="dauer-value">–</span>
+        </div>
+
+        <div class="field">
+          <label for="notizen">Anmerkungen <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
+          <textarea id="notizen" placeholder="z.B. Begleitung zum Arzt, Einkaufen …"></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit" id="btn-submit">Eintrag speichern</button>
+      </form>
+    </div>
+
+    <!-- Erfolgs-Ansicht -->
+    <div id="view-success">
+      <div class="success-icon">✓</div>
+      <div class="success-title">Gespeichert!</div>
+      <p class="success-sub">Ihr Eintrag wurde erfolgreich übermittelt.</p>
+      <div class="success-detail" id="success-detail"></div>
+      <button class="btn-new" onclick="zeigeFormular()">Weiteren Eintrag hinzufügen</button>
+    </div>
+
+  </div>
+
+  <script src="stunden-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script>
+    /* ── Initialisierung ──────────────────────────────────────── */
+    let supabaseClient = null;
+
+    if (!window.DEMO_MODUS && window.SUPABASE_URL && window.SUPABASE_KEY) {
+      const { createClient } = window.supabase;
+      supabaseClient = createClient(window.SUPABASE_URL, window.SUPABASE_KEY);
+    } else {
+      document.getElementById('demo-banner').classList.add('visible');
+    }
+
+    // Betreuer-Dropdown befüllen
+    const sel = document.getElementById('betreuer');
+    (window.BETREUER_LISTE || []).forEach(name => {
+      const opt = document.createElement('option');
+      opt.value = opt.textContent = name;
+      sel.appendChild(opt);
+    });
+
+    // Familien-Datalist befüllen
+    const dl = document.getElementById('familien-list');
+    (window.FAMILIEN_LISTE || []).forEach(name => {
+      const opt = document.createElement('option');
+      opt.value = name;
+      dl.appendChild(opt);
+    });
+
+    // Heutiges Datum als Standard
+    document.getElementById('datum').value = new Date().toISOString().slice(0, 10);
+
+    /* ── Stunden-Berechnung ───────────────────────────────────── */
+    function berechneDauer() {
+      const von = document.getElementById('von').value;
+      const bis = document.getElementById('bis').value;
+      const box = document.getElementById('dauer-box');
+      const val = document.getElementById('dauer-value');
+
+      if (!von || !bis) { box.style.display = 'none'; return null; }
+
+      const [vh, vm] = von.split(':').map(Number);
+      const [bh, bm] = bis.split(':').map(Number);
+      const minuten = (bh * 60 + bm) - (vh * 60 + vm);
+
+      if (minuten <= 0) {
+        box.style.display = 'none';
+        return null;
+      }
+
+      const std = Math.floor(minuten / 60);
+      const min = minuten % 60;
+      val.textContent = std > 0 && min > 0 ? `${std} Std. ${min} Min.`
+                      : std > 0            ? `${std} Stunde${std > 1 ? 'n' : ''}`
+                                           : `${min} Minuten`;
+      box.style.display = 'flex';
+      return minuten / 60;
+    }
+
+    document.getElementById('von').addEventListener('input', berechneDauer);
+    document.getElementById('bis').addEventListener('input', berechneDauer);
+
+    /* ── Formular-Submit ──────────────────────────────────────── */
+    document.getElementById('form-stunden').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const errEl = document.getElementById('error-msg');
+      errEl.classList.remove('visible');
+
+      const betreuer = document.getElementById('betreuer').value.trim();
+      const familie  = document.getElementById('familie').value.trim();
+      const datum    = document.getElementById('datum').value;
+      const von      = document.getElementById('von').value;
+      const bis      = document.getElementById('bis').value;
+      const notizen  = document.getElementById('notizen').value.trim();
+      const stunden  = berechneDauer();
+
+      // Validierung
+      if (!betreuer) { zeigeFehler('Bitte Ihren Namen auswählen.'); return; }
+      if (!familie)  { zeigeFehler('Bitte Familie / Klient angeben.'); return; }
+      if (!datum)    { zeigeFehler('Bitte Datum angeben.'); return; }
+      if (!von)      { zeigeFehler('Bitte Startzeit angeben.'); return; }
+      if (!bis)      { zeigeFehler('Bitte Endzeit angeben.'); return; }
+      if (!stunden || stunden <= 0) { zeigeFehler('Die Endzeit muss nach der Startzeit liegen.'); return; }
+
+      const eintrag = { betreuer, familie, datum, von_uhrzeit: von, bis_uhrzeit: bis,
+                        stunden: Math.round(stunden * 100) / 100, notizen };
+
+      const btn = document.getElementById('btn-submit');
+      btn.disabled = true;
+      btn.textContent = 'Wird gespeichert …';
+
+      try {
+        if (supabaseClient) {
+          const { error } = await supabaseClient.from('stunden_eintraege').insert([eintrag]);
+          if (error) throw error;
+        } else {
+          // Demo-Modus: localStorage
+          const vorhandene = JSON.parse(localStorage.getItem('karohilft_stunden') || '[]');
+          eintrag.id = crypto.randomUUID ? crypto.randomUUID() : Date.now().toString();
+          eintrag.erstellt_am = new Date().toISOString();
+          vorhandene.push(eintrag);
+          localStorage.setItem('karohilft_stunden', JSON.stringify(vorhandene));
+        }
+        zeigeErfolg(eintrag);
+      } catch (err) {
+        zeigeFehler('Fehler beim Speichern: ' + (err.message || err));
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Eintrag speichern';
+      }
+    });
+
+    function zeigeFehler(msg) {
+      const el = document.getElementById('error-msg');
+      el.textContent = msg;
+      el.classList.add('visible');
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function zeigeErfolg(e) {
+      document.getElementById('view-form').style.display = 'none';
+      const s = document.getElementById('view-success');
+      s.style.display = 'block';
+
+      const datum = new Date(e.datum + 'T12:00:00');
+      const datumStr = datum.toLocaleDateString('de-AT', { day: 'numeric', month: 'long', year: 'numeric' });
+      const std = Math.floor(e.stunden);
+      const min = Math.round((e.stunden - std) * 60);
+      const dauerStr = std > 0 && min > 0 ? `${std} Std. ${min} Min.`
+                     : std > 0            ? `${std} Stunde${std > 1 ? 'n' : ''}`
+                                          : `${min} Minuten`;
+
+      document.getElementById('success-detail').innerHTML = `
+        <div class="success-row"><span>Betreuer/in</span><span>${e.betreuer}</span></div>
+        <div class="success-row"><span>Familie</span><span>${e.familie}</span></div>
+        <div class="success-row"><span>Datum</span><span>${datumStr}</span></div>
+        <div class="success-row"><span>Uhrzeit</span><span>${e.von_uhrzeit} – ${e.bis_uhrzeit} Uhr</span></div>
+        <div class="success-row"><span>Dauer</span><span>${dauerStr}</span></div>
+        ${e.notizen ? `<div class="success-row"><span>Anmerkung</span><span>${e.notizen}</span></div>` : ''}
+      `;
+    }
+
+    function zeigeFormular() {
+      document.getElementById('view-success').style.display = 'none';
+      document.getElementById('view-form').style.display = 'block';
+      document.getElementById('form-stunden').reset();
+      document.getElementById('datum').value = new Date().toISOString().slice(0, 10);
+      document.getElementById('dauer-box').style.display = 'none';
+      document.getElementById('error-msg').classList.remove('visible');
+    }
+  </script>
+</body>
+</html>
