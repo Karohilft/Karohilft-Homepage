@@ -1,0 +1,70 @@
+Options -Indexes
+
+# ── HTTPS erzwingen ──
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ── www erzwingen ──
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ── Alte WordPress-URLs → neue Seiten (301 permanent) ──
+
+# Startseite / allgemeine alte Seiten
+RewriteRule ^(home|startseite|start)/?$ / [L,R=301]
+
+# Über uns
+RewriteRule ^ueber-uns/?$ /#team [L,R=301]
+RewriteRule ^uber-uns/?$ /#team [L,R=301]
+RewriteRule ^about/?$ /#team [L,R=301]
+RewriteRule ^team/?$ /#team [L,R=301]
+
+# Mithelfen / Ehrenamt
+RewriteRule ^mithelfen/?$ /#mithelfen [L,R=301]
+RewriteRule ^ehrenamt/?$ /#mithelfen [L,R=301]
+RewriteRule ^ich-will-helfen/?$ /#mithelfen [L,R=301]
+RewriteRule ^mitmachen/?$ /#mithelfen [L,R=301]
+
+# Spenden
+RewriteRule ^spenden/?$ /#spenden [L,R=301]
+RewriteRule ^donate/?$ /#spenden [L,R=301]
+RewriteRule ^donor-dashboard/?$ /#spenden [L,R=301]
+
+# Kontakt
+RewriteRule ^kontakt/?$ /#kontakt [L,R=301]
+RewriteRule ^contact/?$ /#kontakt [L,R=301]
+
+# Betreuung allgemein
+RewriteRule ^betreuung/?$ / [L,R=301]
+RewriteRule ^betreuung-zuhause/?$ / [L,R=301]
+RewriteRule ^pflege/?$ / [L,R=301]
+RewriteRule ^pflegedienst/?$ / [L,R=301]
+
+# 24h-Betreuung alte URLs
+RewriteRule ^24h-betreuung/?$ /24h-betreuung-wien.html [L,R=301]
+RewriteRule ^ich-will-helfen/24h-betreuung/?$ /24h-betreuung-wien.html [L,R=301]
+RewriteRule ^leistungen/24h-betreuung/?$ /24h-betreuung-wien.html [L,R=301]
+RewriteRule ^24-stunden-betreuung/?$ /24h-betreuung-wien.html [L,R=301]
+
+# Stundenbetreuung alte URLs
+RewriteRule ^stundenbetreuung/?$ /stundenbetreuung-wien.html [L,R=301]
+RewriteRule ^leistungen/stundenbetreuung/?$ /stundenbetreuung-wien.html [L,R=301]
+
+# Leistungen allgemein
+RewriteRule ^leistungen/?$ /#leistungen [L,R=301]
+RewriteRule ^services/?$ /#leistungen [L,R=301]
+
+# FAQ
+RewriteRule ^fragen/?$ /faq.html [L,R=301]
+RewriteRule ^haeufige-fragen/?$ /faq.html [L,R=301]
+
+# WordPress-spezifische URLs
+RewriteRule ^author/.*$ / [L,R=301]
+RewriteRule ^wp-admin/?$ / [L,R=301]
+RewriteRule ^wp-login\.php$ / [L,R=301]
+RewriteRule ^feed/?$ / [L,R=301]
+RewriteRule ^category/.*$ / [L,R=301]
+RewriteRule ^tag/.*$ / [L,R=301]
+RewriteRule ^page/.*$ / [L,R=301]
+RewriteRule ^\?p=[0-9]+$ / [L,R=301]
