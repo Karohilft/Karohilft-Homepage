@@ -2218,3 +2218,42 @@ section { position: relative; }
   .calc-card { padding: 1.5rem; }
   .calc-chevron { display: none; }
 }
+
+
+/* ── LOCAL INTRO (Landingpages) ── */
+.local-intro {
+  padding: 4rem 0 2rem;
+  background: #fff;
+}
+
+.local-intro-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 2rem 2.5rem;
+  background: var(--cream);
+  border-radius: var(--r-lg);
+  border-left: 4px solid var(--sage);
+}
+
+.local-intro-inner h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  color: var(--ink);
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.local-intro-inner p {
+  color: var(--ink-light);
+  line-height: 1.85;
+  font-size: 1.02rem;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .local-intro-inner {
+    padding: 1.5rem;
+    text-align: left;
+  }
+}
