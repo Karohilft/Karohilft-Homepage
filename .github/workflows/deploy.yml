@@ -16,10 +16,10 @@ jobs:
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
+          server: e133904-ftp.services.easyname.eu
+          username: 202249ftp1
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          server-dir: /html/karohilft-neu/
           exclude: |
             **/.git*
             **/.git*/**
