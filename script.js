@@ -372,6 +372,8 @@
       const totalEl = document.getElementById('calcTotal');
       const unitEl  = document.getElementById('calcUnit');
       const toggleBtn = document.getElementById('calcToggleBtn');
+      const zweiteCb = document.getElementById('calcZweitePerson');
+      const zweitePerson = zweiteCb ? zweiteCb.checked : false;
 
       if (!bl || !stufe) {
         if (totalEl) totalEl.textContent = '—';
@@ -382,7 +384,9 @@
 
       if (toggleBtn) toggleBtn.style.display = '';
 
-      const tagessatz28 = 90 * 28;
+      const tagesrate   = zweitePerson ? 100 : 90;
+      const tagessatz28 = tagesrate * 28;
+      const zuschlag28  = zweitePerson ? 10 * 28 : 0;
       const agentur     = 280;
       const reise       = 200;
       const bundesf     = stufe >= 3 ? 800 : 0;
@@ -400,7 +404,11 @@
       }
       if (unitEl) unitEl.style.visibility = 'visible';
 
+      set('d_tagessatz_label', 'Tagessatz (€' + tagesrate + ') × 28 Tage');
       set('d_tagessatz', fmtEUR(tagessatz28));
+      const zweiteRow = document.getElementById('d_zweite_row');
+      if (zweiteRow) zweiteRow.style.display = zweitePerson ? '' : 'none';
+      set('d_zweite', fmtEUR(zuschlag28));
       set('d_agentur',   fmtEUR(agentur));
       set('d_reise',     fmtEUR(reise));
       set('d_bundes',    bundesf > 0 ? '− ' + fmtEUR(bundesf) : fmtEUR(0));
@@ -416,6 +424,8 @@
 
     blSel.addEventListener('change', calcUpdate);
     stSel.addEventListener('change', calcUpdate);
+    const zweiteCb = document.getElementById('calcZweitePerson');
+    if (zweiteCb) zweiteCb.addEventListener('change', calcUpdate);
     calcUpdate();
 
     const toggleBtn  = document.getElementById('calcToggleBtn');
@@ -437,6 +447,7 @@
       resetBtn.addEventListener('click', () => {
         blSel.value = '';
         stSel.value = '';
+        if (zweiteCb) zweiteCb.checked = false;
         calcUpdate();
         if (detailsDiv) detailsDiv.style.display = 'none';
         if (toggleIcon) toggleIcon.classList.remove('open');

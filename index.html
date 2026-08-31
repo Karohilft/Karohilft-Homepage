@@ -678,6 +678,14 @@
         </div>
       </div>
 
+      <div class="calc-option">
+        <label class="calc-option-label" for="calcZweitePerson">
+          <input type="checkbox" id="calcZweitePerson" class="calc-option-checkbox">
+          <span class="calc-option-toggle"></span>
+          <span class="calc-option-text">Zweite Person im Haushalt <span class="calc-option-note">(+€10 / Tag)</span></span>
+        </label>
+      </div>
+
       <div class="calc-result-box">
         <div class="calc-result-label">VORAUSSICHTLICHER EIGENANTEIL (28 TAGE)</div>
         <div class="calc-result-row">
@@ -693,8 +701,12 @@
 
       <div class="calc-details" id="calcDetails">
         <div class="calc-detail-row">
-          <span>Tagessatz (€90) × 28 Tage</span>
+          <span id="d_tagessatz_label">Tagessatz (€90) × 28 Tage</span>
           <span id="d_tagessatz">2.520,00</span>
+        </div>
+        <div class="calc-detail-row" id="d_zweite_row" style="display:none">
+          <span>Zuschlag 2. Person im Haushalt</span>
+          <span id="d_zweite">280,00</span>
         </div>
         <div class="calc-detail-row">
           <span>Karohilft Agenturhonorar</span>
