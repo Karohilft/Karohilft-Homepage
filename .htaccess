@@ -48,8 +48,9 @@ RewriteRule ^leistungen/24h-betreuung/?$ /24h-betreuung-wien.html [L,R=301]
 RewriteRule ^24-stunden-betreuung/?$ /24h-betreuung-wien.html [L,R=301]
 
 # Stundenbetreuung alte URLs
-RewriteRule ^stundenbetreuung/?$ /stundenbetreuung-wien.html [L,R=301]
-RewriteRule ^leistungen/stundenbetreuung/?$ /stundenbetreuung-wien.html [L,R=301]
+RewriteRule ^stundenbetreuung/?$ /24h-betreuung-wien.html [L,R=301]
+RewriteRule ^leistungen/stundenbetreuung/?$ /24h-betreuung-wien.html [L,R=301]
+RewriteRule ^stundenbetreuung-wien\.html$ /24h-betreuung-wien.html [L,R=301]
 
 # Leistungen allgemein
 RewriteRule ^leistungen/?$ /#leistungen [L,R=301]
