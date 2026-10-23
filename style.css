@@ -2031,7 +2031,61 @@ section { position: relative; }
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.2rem;
+}
+
+.calc-option {
+  margin-bottom: 1.8rem;
+}
+.calc-option-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  user-select: none;
+}
+.calc-option-checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.calc-option-toggle {
+  position: relative;
+  width: 42px;
+  height: 24px;
+  background: var(--cream-alt);
+  border-radius: 12px;
+  transition: background 0.2s ease;
+  flex-shrink: 0;
+}
+.calc-option-toggle::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease;
+}
+.calc-option-checkbox:checked + .calc-option-toggle {
+  background: var(--sage);
+}
+.calc-option-checkbox:checked + .calc-option-toggle::after {
+  transform: translateX(18px);
+}
+.calc-option-text {
+  font-size: 0.95rem;
+  color: var(--dark);
+  font-weight: 500;
+}
+.calc-option-note {
+  font-weight: 400;
+  color: var(--mid);
+  font-size: 0.88rem;
 }
 
 .calc-label {
