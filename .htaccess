@@ -26,10 +26,8 @@ RewriteRule ^ehrenamt/?$ /#mithelfen [L,R=301]
 RewriteRule ^ich-will-helfen/?$ /#mithelfen [L,R=301]
 RewriteRule ^mitmachen/?$ /#mithelfen [L,R=301]
 
-# Spenden
-RewriteRule ^spenden/?$ /#spenden [L,R=301]
-RewriteRule ^donate/?$ /#spenden [L,R=301]
-RewriteRule ^donor-dashboard/?$ /#spenden [L,R=301]
+# Spenden (nicht mehr angeboten)
+RewriteRule ^(spenden|donate|donor-dashboard)/?$ / [L,R=301]
 
 # Kontakt
 RewriteRule ^kontakt/?$ /#kontakt [L,R=301]
