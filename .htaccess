@@ -20,7 +20,7 @@ RewriteRule ^uber-uns/?$ /#team [L,R=301]
 RewriteRule ^about/?$ /#team [L,R=301]
 RewriteRule ^team/?$ /#team [L,R=301]
 
-# Mithelfen / Ehrenamt
+# Mithelfen
 RewriteRule ^mithelfen/?$ /#mithelfen [L,R=301]
 RewriteRule ^ehrenamt/?$ /#mithelfen [L,R=301]
 RewriteRule ^ich-will-helfen/?$ /#mithelfen [L,R=301]
